@@ -3,7 +3,7 @@
 #include "adc.h"
 #include "oled_u8g2.h"
 
-uint16_t g_iAdcx[2];//缓存ADC采样值
+uint16_t g_iAdcx[4];//缓存ADC采样值
 
 void RK_init(void)
 {
