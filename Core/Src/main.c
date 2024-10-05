@@ -29,7 +29,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "oled_u8g2.h"
-#include "rocker_key.h"
+#include "nrf24l01.h"
+#include "rc.h"
 
 #ifdef MODULE_MPU6050
 #include "mpu6050.h"
@@ -109,14 +110,14 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   OLED_U8G2_init();
-  RK_init();
+  RC_init();
 
 #ifdef MODULE_MPU6050
   MPU_Init();					       //��ʼ��MPU6050
   uint8_t res = 0;
   do{
     res = mpu_dmp_init();
-		ERR_LOG("mpu_dmp_init code: %d\r\n",res);
+		ERR_LOG("mpu_dmp_init fail code: %d\r\n",res);
 	}while (res);
 #endif
 
@@ -147,16 +148,17 @@ int main(void)
 #endif
     //////////////////////////////  1s   ///////////////////////////////// 
     if (loop_cnt % 100 == 0) {
-      // HAL_GPIO_TogglePin(DOGGY_GPIO_Port, DOGGY_Pin);
+      HAL_GPIO_TogglePin(DOGGY_GPIO_Port, DOGGY_Pin);
       // printf("hello purui!\r\n");
 #ifdef MODULE_MPU6050   
       OLED_U8G2_draw_mpu6050(&imu_data);
 #endif
+    RC_control();
     }
     //////////////////////////////  50ms   ///////////////////////////////// 
     if (loop_cnt % 1 == 0) {
       // RK_get_xyzVal();
-      HAL_GPIO_WritePin(DOGGY_GPIO_Port, DOGGY_Pin,HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)==GPIO_PIN_RESET?GPIO_PIN_SET:GPIO_PIN_RESET);
+      // HAL_GPIO_WritePin(DOGGY_GPIO_Port, DOGGY_Pin,HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)==GPIO_PIN_RESET?GPIO_PIN_SET:GPIO_PIN_RESET);
     }
 
     HAL_Delay(10);

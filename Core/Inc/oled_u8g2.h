@@ -4,6 +4,8 @@
 #include "main.h"
 #include "u8g2.h"
 #include "mpu6050.h"
+#include "com_rc.h"
+#include "rc.h"
 
 
 #define MAX_LEN    128  //
@@ -28,8 +30,11 @@ uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *ar
 void OLED_U8G2_init(void);
 void OLED_U8G2_draw_test(void);
 void OLED_U8G2_draw_buf(uint8_t * buf, int buf_len);
+void OLED_U8G2_draw_hex(uint8_t * buf, int buf_len);
 void OLED_U8G2_draw_mpu6050(imu_data_t *);
 void OLED_U8G2_draw_rocker_key(uint16_t x, uint16_t y);
+void OLED_U8G2_draw_rc_com(rc_data_t *rc);
+void OLED_U8G2_draw_rc_keys(rc_keys_t *rc);
 
 
 #endif

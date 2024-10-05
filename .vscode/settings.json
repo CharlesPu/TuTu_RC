@@ -2,6 +2,12 @@
   "files.associations": {
     "dma.h": "c",
     "oled_u8g2.h": "c",
-    "mpu6050.h": "c"
+    "mpu6050.h": "c",
+    "rocker_key.h": "c",
+    "com_rc.h": "c",
+    "rc_signal.h": "c",
+    "main.h": "c",
+    "adc.h": "c",
+    "nrf24l01.h": "c"
   }
 }
