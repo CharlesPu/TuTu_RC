@@ -4,6 +4,18 @@
 const uint8_t TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 const uint8_t RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //接收地址
   
+
+void NRF24L01_init(void) 
+{
+  while(NRF24L01_Check())
+  {
+    ERR_LOG("NRF24L01 check fail!\r\n"); 
+    HAL_Delay(1000);
+  }
+	INF_LOG("NRF24L01 check done\r\n");
+  NRF24L01_TX_Mode();
+  INF_LOG("NRF24L01 tx mode\r\n");
+}
 /**
   * 函数功能: 往串行Flash读取写入一个字节数据并接收一个字节数据
   * 输入参数: byte：待发送数据

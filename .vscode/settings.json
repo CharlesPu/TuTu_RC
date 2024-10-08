@@ -8,6 +8,8 @@
     "rc_signal.h": "c",
     "main.h": "c",
     "adc.h": "c",
-    "nrf24l01.h": "c"
+    "nrf24l01.h": "c",
+    "buzzer.h": "c",
+    "vib_motor.h": "c"
   }
 }

@@ -399,6 +399,31 @@
               <FilePath>..\Core\Src\oled_u8g2.c</FilePath>
             </File>
             <File>
+              <FileName>nrf24l01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\nrf24l01.c</FilePath>
+            </File>
+            <File>
+              <FileName>rc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\rc.c</FilePath>
+            </File>
+            <File>
+              <FileName>com_rc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\com_rc.c</FilePath>
+            </File>
+            <File>
+              <FileName>buzzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>vib_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\vib_motor.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -804,21 +829,6 @@
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f1xx_hal_msp.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf24l01.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\nrf24l01.c</FilePath>
-            </File>
-            <File>
-              <FileName>rc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\rc.c</FilePath>
-            </File>
-            <File>
-              <FileName>com_rc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\com_rc.c</FilePath>
             </File>
           </Files>
         </Group>

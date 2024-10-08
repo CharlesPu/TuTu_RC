@@ -31,6 +31,8 @@
 #include "oled_u8g2.h"
 #include "nrf24l01.h"
 #include "rc.h"
+#include "buzzer.h"
+#include "vib_motor.h"
 
 #ifdef MODULE_MPU6050
 #include "mpu6050.h"
@@ -109,6 +111,8 @@ int main(void)
   MX_ADC1_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+  BUZZER_init();
+  VIBMOTOR_init();
   OLED_U8G2_init();
   RC_init();
 
@@ -122,6 +126,8 @@ int main(void)
 #endif
 
   HAL_Delay(2000);
+  BUZZER_beep_twice();
+  VIBMOTOR_vibrate_once();
   INF_LOG("tutu rc start!\r\n");
   /* USER CODE END 2 */
 
@@ -153,12 +159,12 @@ int main(void)
 #ifdef MODULE_MPU6050   
       OLED_U8G2_draw_mpu6050(&imu_data);
 #endif
-    RC_control();
+      // RC_control();
     }
     //////////////////////////////  50ms   ///////////////////////////////// 
-    if (loop_cnt % 1 == 0) {
+    if (loop_cnt % 5 == 1) {
       // RK_get_xyzVal();
-      // HAL_GPIO_WritePin(DOGGY_GPIO_Port, DOGGY_Pin,HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)==GPIO_PIN_RESET?GPIO_PIN_SET:GPIO_PIN_RESET);
+      RC_control();
     }
 
     HAL_Delay(10);

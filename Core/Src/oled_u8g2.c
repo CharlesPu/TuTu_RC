@@ -149,27 +149,26 @@ void OLED_U8G2_draw_rc_keys(rc_keys_t *rc)
   u8g2_ClearBuffer(&my_u8g2); 
 
   u8g2_DrawFrame(&my_u8g2,15,0,30,6);
-  if (rc->sw_left.sw_1!=0) u8g2_DrawBox(&my_u8g2,15,0,10,6);
+  if (rc->sw_left.sw_1!=0) u8g2_DrawBox(&my_u8g2,35,0,10,6);
   if (rc->sw_left.sw_2!=0) u8g2_DrawBox(&my_u8g2,25,0,10,6);
-  if (rc->sw_left.sw_3!=0) u8g2_DrawBox(&my_u8g2,35,0,10,6);
+  if (rc->sw_left.sw_3!=0) u8g2_DrawBox(&my_u8g2,15,0,10,6);
   u8g2_DrawFrame(&my_u8g2,83,0,30,6);
-  if (rc->sw_right.sw_1!=0) u8g2_DrawBox(&my_u8g2,83,0,10,6);
+  if (rc->sw_right.sw_1!=0) u8g2_DrawBox(&my_u8g2,103,0,10,6);
   if (rc->sw_right.sw_2!=0) u8g2_DrawBox(&my_u8g2,93,0,10,6);
-  if (rc->sw_right.sw_3!=0) u8g2_DrawBox(&my_u8g2,103,0,10,6);
+  if (rc->sw_right.sw_3!=0) u8g2_DrawBox(&my_u8g2,83,0,10,6);
 
   u8g2_DrawFrame(&my_u8g2,0,16,64,32);
   u8g2_DrawCircle(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
-  if (rc->rk_left.z!=0) u8g2_DrawDisc(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
+  if (rc->rk_left.z==0) u8g2_DrawDisc(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
   u8g2_DrawFrame(&my_u8g2,65,16,63,32);
   u8g2_DrawCircle(&my_u8g2,64+64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
-  if (rc->rk_right.z!=0) u8g2_DrawDisc(&my_u8g2,64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
+  if (rc->rk_right.z==0) u8g2_DrawDisc(&my_u8g2,64+64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
   
-  u8g2_DrawCircle(&my_u8g2,40,54,4,U8G2_DRAW_ALL);
-  if (rc->key_left!=0) u8g2_DrawDisc(&my_u8g2,40,54,4,U8G2_DRAW_ALL);
+  u8g2_DrawCircle(&my_u8g2,40,56,5,U8G2_DRAW_ALL);
+  if (rc->key_left!=0) u8g2_DrawDisc(&my_u8g2,40,56,5,U8G2_DRAW_ALL);
 
-  u8g2_DrawCircle(&my_u8g2,88,54,4,U8G2_DRAW_ALL);
-  if (rc->key_right!=0) u8g2_DrawDisc(&my_u8g2,88,54,4,U8G2_DRAW_ALL);
-
+  u8g2_DrawCircle(&my_u8g2,88,56,5,U8G2_DRAW_ALL);
+  if (rc->key_right!=0) u8g2_DrawDisc(&my_u8g2,88,56,5,U8G2_DRAW_ALL);
 
   u8g2_SendBuffer(&my_u8g2);
 }

@@ -119,6 +119,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 // #define MODULE_MPU6050
+#define MODULE_NRF24L01_TX
 
 #define DBG 0
 #define INF 1
