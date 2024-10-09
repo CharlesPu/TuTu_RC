@@ -28,6 +28,7 @@ uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_p
 uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 
 void OLED_U8G2_init(void);
+void OLED_U8G2_init_animation(void);
 void OLED_U8G2_draw_test(void);
 void OLED_U8G2_draw_buf(uint8_t * buf, int buf_len);
 void OLED_U8G2_draw_hex(uint8_t * buf, int buf_len);

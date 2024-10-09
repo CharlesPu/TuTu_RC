@@ -92,7 +92,9 @@ void RC_control(void)
       // OLED_U8G2_draw_rc_com(&rc_data);
 #ifdef MODULE_NRF24L01_TX
       if(NRF24L01_TxPacket(rc_data.buf)==TX_OK)
-        INF_LOG("NRF24L01 send success\r\n");
+        {
+          // INF_LOG("NRF24L01 send success\r\n");
+        }
       else
         ERR_LOG("NRF24L01 send fail!\r\n");
 #endif

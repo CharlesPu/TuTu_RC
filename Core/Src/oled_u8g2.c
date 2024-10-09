@@ -21,7 +21,19 @@ void OLED_U8G2_init(void)
 	u8g2_InitDisplay(&my_u8g2);                                                                       // 
 	u8g2_SetPowerSave(&my_u8g2, 0);                                                                   // 
 	u8g2_ClearBuffer(&my_u8g2);
+  OLED_U8G2_init_animation();
+}
 
+void OLED_U8G2_init_animation(void)
+{
+  u8g2_ClearBuffer(&my_u8g2); 
+
+	u8g2_SetFont(&my_u8g2,u8g2_font_lubBI19_tf);
+  u8g2_DrawStr(&my_u8g2,0,28,"TuTu RC");
+	u8g2_SetFont(&my_u8g2,u8g2_font_lubBI24_tf);
+  u8g2_DrawStr(&my_u8g2,16,64,"Start!");
+
+  u8g2_SendBuffer(&my_u8g2);
 }
 
 void OLED_U8G2_draw_test(void) 
