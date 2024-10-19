@@ -126,7 +126,7 @@ int main(void)
 #endif
 
   HAL_Delay(2000);
-  // BUZZER_beep_twice();
+  BUZZER_beep_twice();
   VIBMOTOR_vibrate_once();
   INF_LOG("tutu rc start!\r\n");
   /* USER CODE END 2 */

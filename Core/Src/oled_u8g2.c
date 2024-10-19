@@ -171,10 +171,10 @@ void OLED_U8G2_draw_rc_keys(rc_keys_t *rc)
 
   u8g2_DrawFrame(&my_u8g2,0,16,64,32);
   u8g2_DrawCircle(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
-  if (rc->rk_left.z==0) u8g2_DrawDisc(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
+  if (rc->rk_left.z!=0) u8g2_DrawDisc(&my_u8g2,64 * rc->rk_left.x/4096,16+32 * rc->rk_left.y/4096, 2, U8G2_DRAW_ALL);
   u8g2_DrawFrame(&my_u8g2,65,16,63,32);
   u8g2_DrawCircle(&my_u8g2,64+64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
-  if (rc->rk_right.z==0) u8g2_DrawDisc(&my_u8g2,64+64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
+  if (rc->rk_right.z!=0) u8g2_DrawDisc(&my_u8g2,64+64 * rc->rk_right.x/4096,16+32 * rc->rk_right.y/4096, 2, U8G2_DRAW_ALL);
   
   u8g2_DrawCircle(&my_u8g2,40,56,5,U8G2_DRAW_ALL);
   if (rc->key_left!=0) u8g2_DrawDisc(&my_u8g2,40,56,5,U8G2_DRAW_ALL);
