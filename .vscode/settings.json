@@ -10,6 +10,8 @@
     "adc.h": "c",
     "nrf24l01.h": "c",
     "buzzer.h": "c",
-    "vib_motor.h": "c"
+    "vib_motor.h": "c",
+    "inv_mpu.h": "c",
+    "inv_mpu_dmp_motion_driver.h": "c"
   }
 }

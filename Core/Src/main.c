@@ -33,9 +33,9 @@
 #include "rc.h"
 #include "buzzer.h"
 #include "vib_motor.h"
+#include "mpu6050.h"
 
 #ifdef MODULE_MPU6050
-#include "mpu6050.h"
 #include "inv_mpu.h"
 #include "inv_mpu_dmp_motion_driver.h"
 #endif
@@ -116,14 +116,14 @@ int main(void)
   OLED_U8G2_init();
   RC_init();
 
-#ifdef MODULE_MPU6050
-  MPU_Init();					       //��ʼ��MPU6050
-  uint8_t res = 0;
-  do{
-    res = mpu_dmp_init();
-		ERR_LOG("mpu_dmp_init fail code: %d\r\n",res);
-	}while (res);
-#endif
+// #ifdef MODULE_MPU6050
+//   MPU_Init();					       //��ʼ��MPU6050
+//   uint8_t res = 0;
+//   do{
+//     res = mpu_dmp_init();
+// 		ERR_LOG("mpu_dmp_init fail code: %d\r\n",res);
+// 	}while (res);
+// #endif
 
   HAL_Delay(2000);
   BUZZER_beep_twice();
@@ -134,37 +134,57 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   uint64_t loop_cnt=0;
+  RC_MODE rc_mode = RC_KEYS;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
     // OLED_U8G2_draw_test();
-#ifdef MODULE_MPU6050
+    // RK_get_xyzVal();
     imu_data_t imu_data;
-    res= mpu_dmp_get_data(&imu_data);
-    if(!res)
-		{
-			imu_data.temp = MPU_Get_Temperature();							  //�õ��¶�ֵ
-			// MPU_Get_Accelerometer(&imu_data);	//�õ����ٶȴ���������
-			// MPU_Get_Gyroscope(&imu_data);	//�õ�����������
-		}else {
-      ERR_LOG("mpu_dmp_get_data fail: %d\r\n", res);
-    }
-#endif
+// #ifdef MODULE_MPU6050
+//     res = mpu_dmp_get_data(&imu_data);
+//     if(!res)
+// 			imu_data.temp = MPU_Get_Temperature();
+// 		else
+//       ERR_LOG("mpu_dmp_get_data fail: %d\r\n", res);
+// #endif
     //////////////////////////////  1s   ///////////////////////////////// 
     if (loop_cnt % 100 == 0) {
       HAL_GPIO_TogglePin(DOGGY_GPIO_Port, DOGGY_Pin);
       // printf("hello purui!\r\n");
 #ifdef MODULE_MPU6050   
-      OLED_U8G2_draw_mpu6050(&imu_data);
+      // OLED_U8G2_draw_mpu6050(&imu_data);
 #endif
-      // RC_control();
     }
     //////////////////////////////  50ms   ///////////////////////////////// 
     if (loop_cnt % 5 == 1) {
-      // RK_get_xyzVal();
-      RC_control();
+      rc_keys_t rc_keys = RC_get_keys();
+      if (rc_keys.sw_right.sw_2) {
+        if (rc_mode == RC_KEYS){ // 第一次切换�?�来
+        #ifdef MODULE_MPU6050
+          MPU_Init();					    
+          uint8_t res = 0;
+          do{
+            res = mpu_dmp_init();
+            ERR_LOG("mpu_dmp_init fail code: %d\r\n",res);
+          }while (res);
+        #endif
+          VIBMOTOR_vibrate_once();
+        }
+        rc_mode = RC_IMU;
+        #ifdef MODULE_MPU6050
+            uint8_t res = mpu_dmp_get_data(&imu_data);
+            if(!res)
+              imu_data.temp = MPU_Get_Temperature();
+            else
+              ERR_LOG("mpu_dmp_get_data fail: %d\r\n", res);
+        #endif
+      }else {
+        rc_mode = RC_KEYS;
+      }
+      RC_control(&imu_data, &rc_keys);
     }
 
     HAL_Delay(10);

@@ -2,6 +2,7 @@
 #define __ROCKER_KEY_H_	
 
 #include "main.h"
+#include "mpu6050.h"
 
 typedef struct 
 {
@@ -39,7 +40,7 @@ void RK_get_xyzVal(void);
 
 void RC_init(void);
 rc_keys_t RC_get_keys(void);
-void RC_control(void);
+void RC_control(imu_data_t*,rc_keys_t *);
 
 
 

@@ -118,7 +118,7 @@ void Error_Handler(void);
 #define SW1_1_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-// #define MODULE_MPU6050
+#define MODULE_MPU6050
 #define MODULE_NRF24L01_TX
 
 #define DBG 0

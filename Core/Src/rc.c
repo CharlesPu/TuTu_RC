@@ -57,34 +57,37 @@ rc_keys_t RC_get_keys(void)
   return r;
 }
 
-RC_MODE g_rc_mode= RC_KEYS;
-void RC_control(void) 
+RC_MODE g_rc_mode= RC_KEYS; // 没用到
+void RC_control(imu_data_t* imu_data, rc_keys_t *rc_keys) 
 {
   switch (g_rc_mode)
   {
   case RC_KEYS:
     {
-      rc_keys_t rc_keys = RC_get_keys();
-      // OLED_U8G2_draw_rc_keys(&rc_keys);
+      // OLED_U8G2_draw_rc_keys(rc_keys);
       // assemble
         rc_data_t rc_data = {
-        .rk_l_x = rc_keys.rk_left.x,
-        .rk_l_y = rc_keys.rk_left.y,
-        .rk_l_z = rc_keys.rk_left.z,
+        .rk_l_x = rc_keys->rk_left.x,
+        .rk_l_y = rc_keys->rk_left.y,
+        .rk_l_z = rc_keys->rk_left.z,
 
-        .rk_r_x = rc_keys.rk_right.x,
-        .rk_r_y = rc_keys.rk_right.y,
-        .rk_r_z = rc_keys.rk_right.z,
+        .rk_r_x = rc_keys->rk_right.x,
+        .rk_r_y = rc_keys->rk_right.y,
+        .rk_r_z = rc_keys->rk_right.z,
 
-        .key_l = rc_keys.key_left,
-        .key_r = rc_keys.key_right,
+        .key_l = rc_keys->key_left,
+        .key_r = rc_keys->key_right,
 
-        .sw_l_1 = rc_keys.sw_left.sw_1,
-        .sw_l_2 = rc_keys.sw_left.sw_2,
-        .sw_l_3 = rc_keys.sw_left.sw_3,
-        .sw_r_1 = rc_keys.sw_right.sw_1,
-        .sw_r_2 = rc_keys.sw_right.sw_2,
-        .sw_r_3 = rc_keys.sw_right.sw_3,
+        .sw_l_1 = rc_keys->sw_left.sw_1,
+        .sw_l_2 = rc_keys->sw_left.sw_2,
+        .sw_l_3 = rc_keys->sw_left.sw_3,
+        .sw_r_1 = rc_keys->sw_right.sw_1,
+        .sw_r_2 = rc_keys->sw_right.sw_2,
+        .sw_r_3 = rc_keys->sw_right.sw_3,
+
+        .imu_pitch = imu_data->pitch,
+        .imu_roll  = imu_data->roll,
+        .imu_yaw   = imu_data->yaw,
       };
       uint8_t res = rc_data_encode(&rc_data);
       if(res) ERR_LOG("rc data encode fail: %d\r\n", res);
